@@ -6,23 +6,20 @@ const Dashboard = () => {
   const [selectedMenu, setSelectedMenu] = useState('overview');
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
-  const menuItems = [
+  const mainMenuItems = [
     { id: 'overview', label: 'Overview', icon: '📊' },
-    { id: 'parking-zones', label: 'Parking Zones', icon: '🅿️' },
-    { id: 'parking-partners', label: 'Parking Partners', icon: '🤝' },
-    { id: 'roadside-partners', label: 'Roadside Partners', icon: '🛣️' },
-    { id: 'community', label: 'Community', icon: '👥' },
-    { id: 'complaints', label: 'Complaints', icon: '📝' },
-    { id: 'nearby-places', label: 'Nearby Places', icon: '📍' },
-    { id: 'ads', label: 'Advertisements', icon: '📢' },
-    { id: 'police-officers', label: 'Police Officers', icon: '👮' },
-    { id: 'vehicles', label: 'Vehicles', icon: '🚗' },
-    { id: 'payments', label: 'Payments', icon: '💳' },
-    { id: 'wallet', label: 'Wallet', icon: '💰' },
-    { id: 'reports', label: 'Reports', icon: '📈' },
-    { id: 'vouchers', label: 'Vouchers', icon: '🎫' },
-    { id: 'users', label: 'Users', icon: '👤' },
-    { id: 'settings', label: 'Settings', icon: '⚙️' }
+    { id: 'leaderboard', label: 'Leaderboard', icon: '🏆' },
+    { id: 'spreadsheets', label: 'Spreadsheets', icon: '📋' },
+    { id: 'administration', label: 'Administration', icon: '⚙️' },
+    { id: 'sales', label: 'Sales', icon: '💰' },
+    { id: 'schedule', label: 'Schedule', icon: '📅' }
+  ];
+
+  const helpMenuItems = [
+    { id: 'messages', label: 'Messages', icon: '💬', badge: '12' },
+    { id: 'library', label: 'Library', icon: '📚' },
+    { id: 'settings', label: 'Settings', icon: '⚙️' },
+    { id: 'support', label: 'Support', icon: '🆘' }
   ];
 
   const metrics = [
@@ -63,7 +60,7 @@ const Dashboard = () => {
         <nav className="sidebar-nav">
           <div className="nav-section">
             <span className="nav-section-title">MAIN</span>
-            {menuItems.slice(0, 4).map(item => (
+            {mainMenuItems.map(item => (
               <div 
                 key={item.id}
                 className={`nav-item ${selectedMenu === item.id ? 'active' : ''}`}
@@ -76,8 +73,8 @@ const Dashboard = () => {
           </div>
           
           <div className="nav-section">
-            <span className="nav-section-title">MANAGEMENT</span>
-            {menuItems.slice(4, 12).map(item => (
+            <span className="nav-section-title">HELP</span>
+            {helpMenuItems.map(item => (
               <div 
                 key={item.id}
                 className={`nav-item ${selectedMenu === item.id ? 'active' : ''}`}
@@ -85,40 +82,13 @@ const Dashboard = () => {
               >
                 <span className="nav-icon">{item.icon}</span>
                 {!isSidebarCollapsed && <span className="nav-label">{item.label}</span>}
-              </div>
-            ))}
-          </div>
-          
-          <div className="nav-section">
-            <span className="nav-section-title">SYSTEM</span>
-            {menuItems.slice(12).map(item => (
-              <div 
-                key={item.id}
-                className={`nav-item ${selectedMenu === item.id ? 'active' : ''}`}
-                onClick={() => setSelectedMenu(item.id)}
-              >
-                <span className="nav-icon">{item.icon}</span>
-                {!isSidebarCollapsed && <span className="nav-label">{item.label}</span>}
+                {item.badge && !isSidebarCollapsed && (
+                  <span className="notification-badge">{item.badge}</span>
+                )}
               </div>
             ))}
           </div>
         </nav>
-        
-        <div className="sidebar-footer">
-          <div className="nav-item">
-            <span className="nav-icon">🔔</span>
-            {!isSidebarCollapsed && <span className="nav-label">Messages</span>}
-            <span className="notification-badge">12</span>
-          </div>
-          <div className="nav-item">
-            <span className="nav-icon">📚</span>
-            {!isSidebarCollapsed && <span className="nav-label">Library</span>}
-          </div>
-          <div className="nav-item">
-            <span className="nav-icon">🆘</span>
-            {!isSidebarCollapsed && <span className="nav-label">Support</span>}
-          </div>
-        </div>
       </div>
 
       {/* Main Content */}
